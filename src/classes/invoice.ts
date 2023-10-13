@@ -1,4 +1,5 @@
 // classes
+import { HasFormatter } from '../interfaces/HasFormatter.js'
 export class Invoice {
   //   readonly client: string;
   //   private details: string;
