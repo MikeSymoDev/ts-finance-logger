@@ -21,11 +21,23 @@ const list = new ListTemplate(ul);
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
 
+// let doc: HasFormatter;
+// if(type.value === 'invoice') {
+//   doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber)
+// } else {
+//   doc = new Payment(tofrom.value, details.value, amount.valueAsNumber)
+// }
+// list.render(doc, type.value, 'end');
+// });
+
+let values: [string, string, number]
+values = [tofrom.value, details.value, amount.valueAsNumber]
+
 let doc: HasFormatter;
 if(type.value === 'invoice') {
-  doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber)
+  doc = new Invoice(...values)
 } else {
-  doc = new Payment(tofrom.value, details.value, amount.valueAsNumber)
+  doc = new Payment(...values)
 }
 list.render(doc, type.value, 'end');
 });
@@ -94,3 +106,80 @@ list.render(doc, type.value, 'end');
 // invoices.forEach((inv) => {
 //   console.log(inv.client, inv.amount, inv.format());
 // });
+
+
+// ----------------- GENERICS ------------------------- //
+
+
+// const addUID = <T extends {name: string}>(obj: T) => {
+//   let uid =Math.floor(Math.random() * 100);
+//   return {...obj, uid};
+// }
+
+// let docOne = addUID({name: 'yoshi', age: 40});
+// // let docTwo = addUID('hello')
+
+// console.log(docOne.name);
+
+// with Interfaces ----- //
+
+// interface Resource<T> {
+//   uid: number,
+//   resourceName: string,
+//   data: T;
+// }
+
+// const docThree: Resource<object> = {
+//   uid: 1,
+//   resourceName: 'person',
+//   data: {name: 'shaun'}
+// }
+
+
+// const docFour: Resource<string[]> = {
+//   uid: 2,
+//   resourceName: 'shoppinglist',
+//   data: ['test', 'milk']
+// }
+
+// console.log(docThree, docFour);
+
+
+// ----------------- ENUMS ------------------------- //
+
+// enum ResourceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON}
+
+// interface Resource<T> {
+//   uid: number,
+//   resourceType: ResourceType,
+//   data: T;
+// }
+
+// const docOne: Resource<object> = {
+//   uid: 1,
+//   resourceType: ResourceType.DIRECTOR,
+//   data: {title: 'shaun'}
+// }
+
+
+// const docTwo: Resource<object> = {
+//   uid: 2,
+//   resourceType: ResourceType.PERSON,
+//   data: { name: 'yoshi'}
+// }
+
+// console.log(docOne, docTwo)
+
+
+
+// ----------------- TUPLES ------------------------- //
+
+// let arr = ['mario', 3, true];
+
+
+// let tup: [string, number, boolean] = ['mario', 14, false]
+// tup[0] = 'ken';
+// tup[1] = 34;
+
+// let student: [string, number];
+// student =  ['yoshi', 345];
